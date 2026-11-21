@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#fff0f3">
+<title>Для Настёнки ❤️</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;min-height:100vh;padding:24px 16px 50px;background:linear-gradient(135deg,#fff8f0,#ffeaf1 58%,#fff2df);color:#704b55;font-family:Georgia,"Times New Roman",serif}
+.page{width:min(1100px,100%);margin:auto;text-align:center}
+.heading{padding:8px 0 18px}
+.sun{font-size:38px;display:block;animation:float 3s ease-in-out infinite}
+.kicker{font:700 10px Arial,sans-serif;letter-spacing:.25em;text-transform:uppercase;color:#c58b91;margin:10px 0}
+h1{font-size:clamp(32px,6vw,48px);font-weight:500;color:#a45e73;margin:0 0 8px}
+.subtitle{font-size:16px;color:#906a73;margin:0}
+.stage{height:min(68vw,590px);min-height:390px;max-height:590px;position:relative;margin:12px auto 24px;isolation:isolate}
+.collage{position:absolute;inset:0;overflow:hidden;border-radius:28px}
+.photo{position:absolute;width:clamp(105px,18vw,190px);height:clamp(125px,22vw,225px);object-fit:cover;border-radius:15px;border:5px solid rgba(255,255,255,.94);box-shadow:0 12px 32px #7f4d5a30;opacity:0;transform:scale(.78) rotate(var(--rot));animation:photoIn .7s ease forwards;transition:transform .5s,opacity .5s}
+.photo:hover{transform:scale(1.06) rotate(0deg);z-index:5}
+.video-frame{position:absolute;z-index:10;left:50%;top:50%;transform:translate(-50%,-50%);width:min(58%,620px);aspect-ratio:16/9;background:#30242a;border:7px solid rgba(255,255,255,.96);border-radius:22px;box-shadow:0 22px 60px #75495650;overflow:hidden;display:grid;place-items:center}
+video{width:100%;height:100%;object-fit:contain;background:#241b20}
+.video-placeholder{position:absolute;inset:0;display:grid;place-items:center;padding:18px;color:#ffeef2;text-align:center;background:linear-gradient(145deg,#795263,#bd8294)}
+.video-placeholder strong{display:block;font-size:clamp(17px,3vw,25px);font-weight:500;margin-bottom:7px}
+.video-placeholder span{font:12px Arial,sans-serif;opacity:.85}
+.controls{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin:0 auto 25px}
+.control-label,.shuffle{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:46px;padding:12px 18px;border-radius:999px;background:#fff;color:#a45e73;border:1px solid #f0d5de;box-shadow:0 5px 18px #995b6c12;font:600 13px Arial,sans-serif;cursor:pointer}
+.control-label:hover,.shuffle:hover{background:#fff5f7}
+.control-label input{display:none}
+.shuffle{background:linear-gradient(135deg,#d98c9d,#bd7189);color:white;border:0}
+.hint{font:12px/1.5 Arial,sans-serif;color:#a9828b;margin:-12px auto 28px;max-width:560px}
+.letter-card{max-width:700px;margin:0 auto;padding:30px clamp(20px,5vw,45px);background:rgba(255,255,255,.82);border:1px solid white;border-radius:26px;box-shadow:0 18px 55px #995b6c17;text-align:left;line-height:1.8;font-size:16px}
+.letter-card p{margin:0 0 14px}
+.sign{text-align:center;color:#b46d80;font-style:italic;margin:20px 0 0!important}
+.footer{text-align:center;margin:20px 0 0;font:11px Arial,sans-serif;letter-spacing:.08em;color:#c49aa2}
+@keyframes photoIn{to{opacity:1;transform:scale(1) rotate(var(--rot))}}
+@keyframes float{0%,100%{transform:translateY(0) rotate(-5deg)}50%{transform:translateY(-8px) rotate(5deg)}}
+@media(max-width:600px){
+ body{padding:15px 10px 35px}
+ .stage{height:510px;min-height:510px}
+ .video-frame{width:82%;border-width:5px;border-radius:15px}
+ .photo{width:clamp(95px,29vw,145px);height:clamp(115px,34vw,170px);border-width:4px}
+ .letter-card{font-size:15px;padding:24px 20px}
+}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition:none!important}}
+</style>
+</head>
+<body>
+<main class="page">
+ <header class="heading">
+  <span class="sun">☀️</span>
+  <div class="kicker">маленький сюрприз для тебя</div>
+  <h1>Настёнка, это тебе</h1>
+  <p class="subtitle">Немного наших моментов, собранных в одном месте ❤️</p>
+ </header>
+
+ <section class="stage" aria-label="Видео в окружении фотографий">
+  <div class="collage" id="collage"></div>
+  <div class="video-frame">
+   <video id="mainVideo" controls playsinline preload="metadata" hidden></video>
+   <div class="video-placeholder" id="videoPlaceholder">
+    <div><strong>Наше маленькое видео</strong><span>Нажми «Выбрать видео», чтобы добавить его сюда</span></div>
+   </div>
+  </div>
+ </section>
+
+ <div class="controls">
+  <label class="control-label">＋ Добавить фотографии
+   <input id="photoInput" type="file" accept="image/*" multiple>
+  </label>
+  <label class="control-label">▶ Выбрать видео
+   <input id="videoInput" type="file" accept="video/*">
+  </label>
+  <button class="shuffle" id="shuffleBtn" type="button">✦ Перемешать фотографии</button>
+ </div>
+ <p class="hint" id="hint" aria-live="polite">Добавь фотографии и видео с телефона или компьютера. Фото будут появляться вокруг видео в случайных местах.</p>
+
+ <section class="letter-card">
+  <p>Я правда верю, что у тебя всё получится. Поэтому никогда не сдавайся, смело иди к своей цели и не оглядывайся назад. Не позволяй никому переубеждать тебя или заставлять сомневаться в себе.</p>
+  <p>Радуйся жизни, улыбайся и свети ярче всех, словно маленькое солнышко! Ведь ты и есть самое настоящее солнышко, любимая моя девочка. <span style="color:#d98c9d">♥</span></p>
+  <p>Ты самая большая умничка на свете, и я безумно горжусь тобой. Спасибо тебе за твою заботу, поддержку, нежность и любовь.</p>
+  <p>Я очень рад, что однажды ты появилась в моей жизни. И хочу, чтобы ты никогда не забывала, какая ты замечательная.</p>
+  <p class="sign">С любовью, для тебя ♥</p>
+ </section>
+ <div class="footer">Ты заслуживаешь всего самого светлого</div>
+</main>
+<script>
+const collage=document.getElementById('collage');
+const photoInput=document.getElementById('photoInput');
+const videoInput=document.getElementById('videoInput');
+const mainVideo=document.getElementById('mainVideo');
+const placeholder=document.getElementById('videoPlaceholder');
+const hint=document.getElementById('hint');
+const shuffleBtn=document.getElementById('shuffleBtn');
+let photoURLs=[];
+
+function placePhotos(){
+ collage.innerHTML='';
+ if(!photoURLs.length)return;
+ const mobile=window.matchMedia('(max-width:600px)').matches;
+ const positions=mobile?[
+  [2,3,-8],[68,3,7],[0,36,6],[72,36,-7],[5,70,-5],[68,70,8],
+  [34,1,5],[34,77,-5],[1,18,4],[75,18,-4],[1,54,-7],[75,54,6]
+ ]:[
+  [2,4,-9],[22,1,7],[72,3,-6],[86,26,8],[2,39,6],[17,68,-7],
+  [78,67,6],[88,45,-8],[37,1,-5],[59,2,8],[36,73,7],[58,75,-6],
+  [3,72,5],[86,5,-7]
+ ];
+ const shuffled=[...photoURLs].sort(()=>Math.random()-.5);
+ shuffled.slice(0,positions.length).forEach((src,i)=>{
+  const [x,y,r]=positions[i];
+  const img=document.createElement('img');
+  img.className='photo';img.src=src;img.alt='Фотография для Настёнки';
+  img.style.left=x+'%';img.style.top=y+'%';img.style.setProperty('--rot',r+'deg');
+  img.style.animationDelay=(Math.random()*.5)+'s';
+  collage.appendChild(img);
+ });
+}
+photoInput.addEventListener('change',()=>{
+ const files=Array.from(photoInput.files||[]).filter(f=>f.type.startsWith('image/'));
+ if(!files.length)return;
+ photoURLs.forEach(URL.revokeObjectURL);photoURLs=files.map(URL.createObjectURL);
+ placePhotos();
+ hint.textContent=`Добавлено фотографий: ${photoURLs.length}. Нажми «Перемешать фотографии», чтобы изменить их расположение.`;
+});
+videoInput.addEventListener('change',()=>{
+ const file=videoInput.files&&videoInput.files[0];if(!file)return;
+ if(mainVideo.dataset.url)URL.revokeObjectURL(mainVideo.dataset.url);
+ const url=URL.createObjectURL(file);mainVideo.dataset.url=url;mainVideo.src=url;
+ mainVideo.hidden=false;placeholder.hidden=true;mainVideo.load();
+});
+shuffleBtn.addEventListener('click',()=>{
+ if(!photoURLs.length){hint.textContent='Сначала добавь фотографии — тогда я смогу их перемешать ❤️';return;}
+ placePhotos();
+});
+window.addEventListener('resize',placePhotos);
+</script>
+</body>
+</html>
