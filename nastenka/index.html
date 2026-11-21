@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 
 <html lang="ru">
 
@@ -34,22 +34,12 @@
 
 <main class="card">
 
-    <div class="sun">☀️</div>
+    <div class="sun">♡</div>
 
-    <div class="kicker">маленький сюрприз для тебя</div>
+    <div class="kicker">маленький сюрприз</div>
 
-    <h1>Привет, Настёнка!</h1>
 
-    <p class="subtitle">
 
-       Посмотри он обратной стороне упаковки
-    </p>
-
-    <div class="divider">
-
-        <span>♡</span>
-
-    </div>
 
     <p class="question">
 
@@ -59,19 +49,11 @@
 
     <form id="passwordForm">
 
-        <input
-
-            type="password"
-
-            id="password"
-
-            placeholder="Твой секретный пароль"
-
-            autocomplete="off"
-
-            required
-
-        >
+        <input type="password"
+               id="password"
+               placeholder="Посмотри он обратной стороне упаковки"
+               autocomplete="off"
+               required>
 
         <button type="submit">
 
@@ -86,6 +68,12 @@
     <div class="bottom-text">
 
         Только для тебя
+
+    </div>
+
+    <div class="bottom-text">
+
+        02:17
 
     </div>
 
@@ -107,7 +95,7 @@ form.addEventListener("submit", function(event) {
 
     if (input.value.trim() === correctPassword) {
 
-        message.textContent = "Правильно! Для тебя открыто кое-что особенное ❤️";
+        message.textContent = "Правильно! Для тебя открыто кое-что особенное ♥";
 
         message.className = "message success";
 
@@ -119,7 +107,7 @@ form.addEventListener("submit", function(event) {
 
     } else {
 
-        message.textContent = "Кажется, пароль немного не тот. Попробуй ещё раз ♥";
+        message.textContent = "Кажется, пароль немного не тот. Попробуй ещё раз ";
 
         message.className = "message error";
 
