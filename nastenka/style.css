@@ -63,8 +63,6 @@ h1 {
  max-width: 560px;
 }
 
-/Коллаж /
-
 .stage {
  position: relative;
  width: 100%;
@@ -94,7 +92,6 @@ h1 {
  will-change: opacity, transform;
 }
 
-/ Видео /
 
 .video-frame {
  position: absolute;
@@ -142,7 +139,7 @@ video {
  opacity: .9;
 }
 
-/ Текстовое письмо /
+
 
 .note {
  max-width: 720px;
@@ -179,7 +176,7 @@ video {
  color: #c49aa2;
 }
 
-/ Анимации /
+
 
 @keyframes photoAppear {
  0% {
@@ -203,7 +200,6 @@ video {
  }
 }
 
-/ Мобильная версия /
 
 @media (max-width: 600px) {
  body {
@@ -233,7 +229,6 @@ video {
  }
 }
 
-/ Учитываем настройки уменьшения анимации */
 
 @media (prefers-reduced-motion: reduce) {
  .sun,
